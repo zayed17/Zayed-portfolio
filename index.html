@@ -32,7 +32,10 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body class="theme-red">
-  
+   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
   <!-- Back to top button -->
   <div class="btn-back_to_top">
     <span class="ti-arrow-up"></span>
@@ -277,7 +280,7 @@
       <h1 class="text-center fw-normal wow fadeInUp">Get in touch</h1>
       <div class="row py-2">
         <div class="col">
-          <form method="post" class="vg-contact-form">
+          <form id="submit-form" action="" class="vg-contact-form">
             <div class="form-row">
               <div class="col-12 mt-3 wow fadeInUp">
                 <input class="form-control" id="name" type="text" name="Name" placeholder="Your Name" required>
@@ -324,39 +327,25 @@
   <script src="../assets/js/google-maps.js"></script>
     
   <script src="../assets/js/topbar-virtual.js"></script>
-  
-  <script src="https://smtpjs.com/v3/smtp.js">
-  </script>
+
   <script>
-    var btn= document.getElementById("btn");
-    btn.addEventListener('click', function(e){
-      e.preventDefault()
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var subject = document.getElementById("subject").value;
-      var message = document.getElementById("message").value;
-      var body = 'name: ' + name + '<br/> email: ' + email + '<br/> subject:' + 
-      subject + '<br/> message:' + message;
-
-      Email.send({
-    Host : "smtp.gmail.com",
-    Username : "mzayed9745@gmail.com",
-    Password : "uhggcrlbpnlrrazl",
-    To : 'mzayed9745@gmail.com',
-    From : email,
-    Subject : subject,
-    Body : body,
-}).then(
-  message => alert(message)
-);
-
-
-
-    })
-
-
- 
-  
-  </script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycby7CzbrYO-6BF-SiXgCGTsOjAdMQrFx5AI7ssrkpH2SFM_UhkyCheQupgYHGHFHL8BnUA/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+    </script>
 </body>
 </html>
